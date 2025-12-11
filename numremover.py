@@ -32,7 +32,7 @@ fileNames = os.listdir(inPath)
 
 for fileName in fileNames:
     # save name and end
-    parts = fileName.split("_")
+    parts = fileName.split("_", 3)
     studentName = parts[0]
     newFileName = parts[-1]
     
