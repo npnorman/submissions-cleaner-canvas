@@ -6,4 +6,3 @@ Put files from canvas in the /in/ folder and run the program. It will generate a
 
 * /in/
 * /out/
-* keep.txt
