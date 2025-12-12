@@ -1,4 +1,12 @@
-# How to use
+# Submissions Cleaner for Canvas
+
+## Setup
+
+1. Clone the repo
+2. Make sure python is installed, I am using python 3.12
+3. Tested on Windows, I think it will work on Mac and Linux, but have not tested it
+
+## How to use
 
 1. Put files from canvas in the /in/ folder and run the program. It will generate an assignment folder with a folder for each student's name, which is based on the file downloaded. It cannot guarentee perfect file renaming, so if there is an issue, check canvas to make sure.
 2. Zip and then upload the file to pythonanywhere (or locally).
