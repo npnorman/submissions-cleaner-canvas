@@ -7,7 +7,7 @@ import re
 # given a file name, remove (1), or -1
 # save file in unique folder
 
-def cleanFiles(uniqueOutPath, inPath):
+def cleanFiles(uniqueOutPath, inPath, saveFiles = False):
     # ensure uniqueness
     keepGoing = True
     index = 0
@@ -52,7 +52,10 @@ def cleanFiles(uniqueOutPath, inPath):
             os.mkdir(studentDirectory)
         
         # move file and give new cleaned name
-        shutil.move("./in/" + fileName, studentDirectory + newFileName)
+        if (saveFiles):
+            shutil.copy("./in/" + fileName, studentDirectory + newFileName)
+        else:
+            shutil.move("./in/" + fileName, studentDirectory + newFileName)
 
 def checkForOut(outPath):
     if os.path.exists(outPath) == False:
