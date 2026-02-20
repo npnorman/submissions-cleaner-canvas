@@ -23,8 +23,19 @@ def cleanFiles(uniqueOutPath, inPath):
     fileNames = os.listdir(inPath)
 
     for fileName in fileNames:
+
+        # set number of strings to exclude
+        defaultExcludeAmount = 3
+        lateModifier = ""
+
+        # check for LATE
+        lateSplit = fileName.split("_")
+        if lateSplit[1] == "LATE":
+            defaultExcludeAmount = 4
+            lateModifier = "_LATE"
+
         # save name and end
-        parts = fileName.split("_", 3)
+        parts = fileName.split("_", defaultExcludeAmount)
         studentName = parts[0]
         newFileName = parts[-1]
         
@@ -34,7 +45,7 @@ def cleanFiles(uniqueOutPath, inPath):
         
         # add to directory
         
-        studentDirectory = outputDir + studentName + "/"
+        studentDirectory = outputDir + studentName + lateModifier + "/"
         if os.path.exists(studentDirectory) == False:
             #create directory
             print("Creating directory " + studentDirectory)
