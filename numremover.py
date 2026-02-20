@@ -7,53 +7,59 @@ import re
 # given a file name, remove (1), or -1
 # save file in unique folder
 
-inPath = "./in/"
-outPath = "./out/"
+def cleanFiles(uniqueOutPath, inPath):
+    # ensure uniqueness
+    keepGoing = True
+    index = 0
+    while keepGoing:
+        outputDir = "./out/" + uniqueOutPath + "/"
+        if os.path.exists(outputDir):
+            uniqueOutPath += str(index)
+            index += 1
+        else:
+            os.mkdir(outputDir)
+            keepGoing = False
 
-if os.path.exists(outPath) == False:
-    os.mkdir(outPath)
+    fileNames = os.listdir(inPath)
 
-uniqueOutPath = "Assignment " + input("Assignment # or Name: ")
-uniqueOutPath = uniqueOutPath.strip()
-uniqueOutPath = uniqueOutPath.replace(" ", "-")
+    for fileName in fileNames:
+        # save name and end
+        parts = fileName.split("_", 3)
+        studentName = parts[0]
+        newFileName = parts[-1]
+        
+        # for new File name,
+        # replace  (1) and -1 with ""
+        newFileName = re.sub(r"(-\d+| \(\d+\))", "", newFileName)
+        
+        # add to directory
+        
+        studentDirectory = outputDir + studentName + "/"
+        if os.path.exists(studentDirectory) == False:
+            #create directory
+            print("Creating directory " + studentDirectory)
+            os.mkdir(studentDirectory)
+        
+        # move file and give new cleaned name
+        shutil.move("./in/" + fileName, studentDirectory + newFileName)
 
-blacklist = []
-whitelist = []
+def checkForOut(outPath):
+    if os.path.exists(outPath) == False:
+        os.mkdir(outPath)
 
-# ensure uniqueness
-keepGoing = True
-index = 0
-while keepGoing:
-    outputDir = "./out/" + uniqueOutPath + "/"
-    if os.path.exists(outputDir):
-        uniqueOutPath += str(index)
-        index += 1
-    else:
-        os.mkdir(outputDir)
-        keepGoing = False
+def main():
+    inPath = "./in/"
+    outPath = "./out/"
 
-fileNames = os.listdir(inPath)
+    checkForOut(outPath)
 
-for fileName in fileNames:
-    # save name and end
-    parts = fileName.split("_", 3)
-    studentName = parts[0]
-    newFileName = parts[-1]
-    
-    # for new File name,
-    # replace  (1) and -1 with ""
-    newFileName = re.sub(r"(-\d+| \(\d+\))", "", newFileName)
-    
-    # add to directory
-    
-    studentDirectory = outputDir + studentName + "/"
-    if os.path.exists(studentDirectory) == False:
-        #create directory
-        print("Creating directory " + studentDirectory)
-        os.mkdir(studentDirectory)
-    
-    # move file and give new cleaned name
-    shutil.move("./in/" + fileName, studentDirectory + newFileName)
-    
-print("Completed files moved and cleaned :)")
-    
+    uniqueOutPath = "Assignment " + input("Assignment # or Name: ")
+    uniqueOutPath = uniqueOutPath.strip()
+    uniqueOutPath = uniqueOutPath.replace(" ", "-")
+
+    cleanFiles(uniqueOutPath, inPath)
+        
+    print("Completed files moved and cleaned :)")
+
+if __name__ == "__main__":
+    main()
