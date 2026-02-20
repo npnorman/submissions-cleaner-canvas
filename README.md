@@ -15,8 +15,10 @@
 
 1. Run the new application_wrapper.py
 2. Add to the in folder by clicking the in button
-3. Hit the clean files button
-4. See the results by clicking the output button
+3. If the checkbox is checked, the files will be copied from /in/ to /out/ during cleaning.
+4. If the checkbox is unchecked, the files will be moved from /in/ to /out/, deleted from /in/ during cleaning.
+5. Hit the clean files button
+6. See the results by clicking the output button
 
 
 ## Needed folders
