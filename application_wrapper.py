@@ -54,7 +54,11 @@ def open_out_folder():
 
 def clean_submissions():
 
-    uniqueOutPath = simpledialog.askstring("Input", "Assignment Name")
+    semester_name = simpledialog.askstring("Input", "Semester")
+    course_number = simpledialog.askstring("Input", "Course Number")
+    assignment_name = simpledialog.askstring("Input", "Assignment Name")
+    
+    uniqueOutPath = f"{semester_name}_{course_number}_{assignment_name}"
     uniqueOutPath = uniqueOutPath.strip()
     uniqueOutPath = uniqueOutPath.replace(" ", "-")
 
